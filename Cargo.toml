@@ -32,6 +32,7 @@ version = "0.15.0"
 default-features = false
 features = [
     "bevy_window",
+    "bevy_pbr",
     "bevy_winit",
     "bevy_core_pipeline",
     "bevy_sprite",
@@ -49,8 +50,10 @@ default = [
     "bevy_render",
     "bevy_sprite",
     "bevy_ui",
+    "bevy_pbr",
 ]
 
+bevy_pbr = ["bevy/bevy_pbr"]
 # Adds tweening systems for asset
 bevy_asset = ["bevy/bevy_asset"]
 # Adds nothing just yet but required by the "bevy_sprite" feature.
@@ -66,6 +69,15 @@ serde = ["dep:serde"]
 
 [package.metadata.docs.rs]
 all-features = true
+
+[[example]]
+name = "basic_color"
+path = "examples/animation/basic_color.rs"
+required-features = [
+    "bevy_pbr",
+    "bevy_asset",
+]
+
 
 [[example]]
 name = "banner_bounce"

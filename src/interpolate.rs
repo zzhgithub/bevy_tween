@@ -70,6 +70,7 @@
 //! [`asset_tween_system`]: crate::tween::asset_tween_system
 
 mod blanket_impl;
+mod color;
 #[cfg(feature = "bevy_sprite")]
 mod sprite;
 mod transform;
@@ -83,6 +84,9 @@ pub use sprite::*;
 
 #[cfg(feature = "bevy_ui")]
 pub use ui::*;
+
+#[cfg(feature = "bevy_pbr")]
+pub use color::*;
 
 use crate::{tween, BevyTweenRegisterSystems};
 use bevy::prelude::*;
@@ -240,6 +244,10 @@ impl Plugin for DefaultInterpolatorsPlugin {
             tween::asset_tween_system::<sprite::ColorMaterial>(),
         )
         .register_type::<tween::AssetTween<sprite::ColorMaterial>>();
+
+        #[cfg(all(feature = "bevy_pbr", feature = "bevy_asset",))]
+        app.add_tween_systems(tween::asset_tween_system::<BaseColor>())
+            .register_type::<tween::AssetTween<BaseColor>>();
     }
 }
 
